@@ -1,1 +1,116 @@
-import 'package:flutter/material.dart';\nimport '../models/credit_card.dart';\nimport 'card_detail_screen.dart';\n\nclass HomeScreen extends StatefulWidget {\n  const HomeScreen({super.key});\n\n  @override\n  State<HomeScreen> createState() => _HomeScreenState();\n}\n\nclass _HomeScreenState extends State<HomeScreen> {\n  final List<CreditCard> _cards = [\n    CreditCard(\n      cardName: 'Platinum Card',\n      bankName: 'American Express',\n      cardType: 'Credit',\n      cardNumber: '**** **** **** 1234',\n      expiryDate: '12/25',\n      cvv: '***',\n      benefits: ['Airport lounge access', '5x points on flights', 'Hotel status'],\n      tags: ['travel', 'rewards'],\n      annualFee: 695.0,\n    ),\n    CreditCard(\n      cardName: 'Sapphire Preferred',\n      bankName: 'Chase',\n      cardType: 'Credit',\n      cardNumber: '**** **** **** 5678',\n      expiryDate: '08/26',\n      cvv: '***',\n      benefits: ['3x points on dining', 'Travel insurance', 'No foreign transaction fees'],\n      tags: ['travel', 'dining'],\n      annualFee: 95.0,\n    ),\n    CreditCard(\n      cardName: 'Freedom Unlimited',\n      bankName: 'Chase',\n      cardType: 'Credit',\n      cardNumber: '**** **** **** 9012',\n      expiryDate: '11/24',\n      cvv: '***',\n      benefits: ['1.5% cashback on all purchases', 'No annual fee'],\n      tags: ['cashback'],\n      annualFee: 0.0,\n    ),\n  ];\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      appBar: AppBar(\n        title: const Text('Credit Card Companion'),\n        centerTitle: true,\n      ),\n      body: Padding(\n        padding: const EdgeInsets.all(16.0),\n        child: Column(\n          crossAxisAlignment: CrossAxisAlignment.start,\n          children: [\n            const Text(\n              'Your Cards',\n              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),\n            ),\n            const SizedBox(height: 16),\n            Expanded(\n              child: ListView.builder(\n                itemCount: _cards.length,\n                itemBuilder: (context, index) {\n                  final card = _cards[index];\n                  return Card(\n                    margin: const EdgeInsets.only(bottom: 16),\n                    child: ListTile(\n                      leading: const Icon(Icons.credit_card, size: 40),\n                      title: Text(card.cardName),\n                      subtitle: Text(card.bankName),\n                      trailing: const Icon(Icons.arrow_forward_ios),\n                      onTap: () {\n                        Navigator.push(\n                          context,\n                          MaterialPageRoute(\n                            builder: (context) => CardDetailScreen(card: card),\n                          ),\n                        );\n                      },\n                    ),\n                  );\n                },\n              ),\n            ),\n            const SizedBox(height: 16),\n            Center(\n              child: ElevatedButton.icon(\n                onPressed: () {\n                  // TODO: Implement AI recommendation feature\n                },\n                icon: const Icon(Icons.lightbulb_outline),\n                label: const Text('Get Smart Recommendation'),\n                style: ElevatedButton.styleFrom(\n                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),\n                  textStyle: const TextStyle(fontSize: 16),\n                ),\n              ),\n            ),\n          ],\n        ),\n      ),\n      floatingActionButton: FloatingActionButton(\n        onPressed: () {\n          // TODO: Navigate to add new card screen\n        },\n        child: const Icon(Icons.add),\n      ),\n    );\n  }\n}
+import 'package:flutter/material.dart';
+import '../models/credit_card.dart';
+import 'card_detail_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<CreditCard> _cards = [
+    CreditCard(
+      cardName: 'Platinum Card',
+      bankName: 'American Express',
+      cardType: 'Credit',
+      cardNumber: '**** **** **** 1234',
+      expiryDate: '12/25',
+      cvv: '***',
+      benefits: ['Airport lounge access', '5x points on flights', 'Hotel status'],
+      tags: ['travel', 'rewards'],
+      annualFee: 695.0,
+    ),
+    CreditCard(
+      cardName: 'Sapphire Preferred',
+      bankName: 'Chase',
+      cardType: 'Credit',
+      cardNumber: '**** **** **** 5678',
+      expiryDate: '08/26',
+      cvv: '***',
+      benefits: ['3x points on dining', 'Travel insurance', 'No foreign transaction fees'],
+      tags: ['travel', 'dining'],
+      annualFee: 95.0,
+    ),
+    CreditCard(
+      cardName: 'Freedom Unlimited',
+      bankName: 'Chase',
+      cardType: 'Credit',
+      cardNumber: '**** **** **** 9012',
+      expiryDate: '11/24',
+      cvv: '***',
+      benefits: ['1.5% cashback on all purchases', 'No annual fee'],
+      tags: ['cashback'],
+      annualFee: 0.0,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Credit Card Companion'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Your Cards',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _cards.length,
+                itemBuilder: (context, index) {
+                  final card = _cards[index];
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: ListTile(
+                      leading: const Icon(Icons.credit_card, size: 40),
+                      title: Text(card.cardName),
+                      subtitle: Text(card.bankName),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CardDetailScreen(card: card),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // TODO: Implement AI recommendation feature
+                },
+                icon: const Icon(Icons.lightbulb_outline),
+                label: const Text('Get Smart Recommendation'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  textStyle: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // TODO: Navigate to add new card screen
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
